@@ -1,0 +1,13 @@
+<!doctype HTML>
+<html>
+<head></head>
+<body>
+<h1>Exam list</h1>
+
+<ul>
+    {% for exam in exams %}
+        <li>{{ exam.firstName }} - {{ exam.lastName }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

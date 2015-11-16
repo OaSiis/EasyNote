@@ -1,0 +1,13 @@
+<!doctype HTML>
+<html>
+<head></head>
+<body>
+<h1>Students list</h1>
+
+<ul>
+    {% for admin in admins %}
+        <li>{{ admin.firstName }} - {{ admin.lastName }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
