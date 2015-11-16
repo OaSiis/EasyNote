@@ -45,7 +45,7 @@ class Student
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Grade", mappedBy="student")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Grade", mappedBy="student" , cascade={"remove"})
      */
     private $grade;
 
