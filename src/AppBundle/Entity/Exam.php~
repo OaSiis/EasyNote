@@ -38,7 +38,7 @@ class Exam
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Grade", mappedBy="exam", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Grade", mappedBy="exam")
      */
     private $grade;
 
@@ -99,53 +99,5 @@ class Exam
     public function getDescription()
     {
         return $this->description;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->grade = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add grade
-     *
-     * @param \AppBundle\Entity\Grade $grade
-     *
-     * @return Exam
-     */
-    public function addGrade(\AppBundle\Entity\Grade $grade)
-    {
-        $this->grade[] = $grade;
-
-        return $this;
-    }
-
-    /**
-     * Remove grade
-     *
-     * @param \AppBundle\Entity\Grade $grade
-     */
-    public function removeGrade(\AppBundle\Entity\Grade $grade)
-    {
-        $this->grade->removeElement($grade);
-    }
-
-    /**
-     * Get grade
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getGrade()
-    {
-        return $this->grade;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString(){
-        return $this->name.' ';
     }
 }

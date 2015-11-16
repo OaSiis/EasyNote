@@ -4,10 +4,26 @@
 <body>
 <h1>Students list</h1>
 
+    <ul>
+        {% for student in students %}
+            <li>{{ student.firstName }} - {{ student.lastName }} <a href="{{ path('student_delete', {id: student.id }) }}">Delete Student</a></li>
+        {% endfor %}
+    </ul>
+<a href="{{ path('student_add') }}">Add Student</a>
+</br>
+<h1>Exam</h1>
+    <ul>
+        {% for exam in exams %}
+            <li>{{ exam.name }} - {{ exam.description }} <a href="{{ path('exam_delete', {id: exam.id }) }}">Delete Exam</a></li>
+        {% endfor %}
+    </ul>
+<a href="{{ path('exam_add') }}">Add Exam</a>
+<h1>Grade</h1>
 <ul>
-    {% for admin in admins %}
-        <li>{{ admin.firstName }} - {{ admin.lastName }}</li>
+    {% for grade in grades %}
+        <li>{{ grade.gradeNumber }} <a href="{{ path('grade_delete', {id: grade.id }) }}">Delete Grade</a></li>
     {% endfor %}
 </ul>
+<a href="{{ path('grade_add') }}">Add Grade</a>
 </body>
 </html>
