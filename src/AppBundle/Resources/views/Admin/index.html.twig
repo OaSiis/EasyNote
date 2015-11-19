@@ -1,7 +1,6 @@
-<!doctype HTML>
-<html>
-<head></head>
-<body>
+{% extends '::base.html.twig' %}
+
+{% block content -%}
 <h1>Students list</h1>
 
     <ul>
@@ -21,11 +20,9 @@
 <h1>Grade</h1>
 <ul>
     {% for grade in grades %}
-        <li>{{ grade.gradeNumber }} <a href="{{ path('grade_delete', {id: grade.id }) }}">Delete Grade</a></li>
+        <li>{{ grade.gradeNumber }} {{ grade.student }} {{ grade.exam }} <a href="{{ path('grade_delete', {id: grade.id }) }}">Delete Grade</a></li>
     {% endfor %}
 </ul>
 <a href="{{ path('grade_add') }}">Add Grade</a>
 
-
-</body>
-</html>
+{% endblock %}

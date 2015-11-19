@@ -43,29 +43,6 @@ class Grade
     private $exam;
 
     /**
-     * Set student
-     *
-     * @param \AppBundle\Entity\Student $student
-     *
-     * @return Grade
-     */
-    public function setStudent(\AppBundle\Entity\Student $student = null)
-    {
-        $this->student = $student;
-        return $this;
-    }
-    /**
-     * Get student
-     *
-     * @return \AppBundle\Entity\Student
-     */
-    public function getStudent()
-    {
-        return $this->student;
-    }
-
-
-    /**
      * Get id
      *
      * @return integer
@@ -99,7 +76,27 @@ class Grade
         return $this->gradeNumber;
     }
 
-
+    /**
+     * Set student
+     *
+     * @param \AppBundle\Entity\Student $student
+     *
+     * @return Grade
+     */
+    public function setStudent(\AppBundle\Entity\Student $student = null)
+    {
+        $this->student = $student;
+        return $this;
+    }
+    /**
+     * Get student
+     *
+     * @return \AppBundle\Entity\Student
+     */
+    public function getStudent()
+    {
+        return $this->student;
+    }
 
     /**
      * Set exam

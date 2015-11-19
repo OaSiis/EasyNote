@@ -43,8 +43,6 @@ class Exam
     private $grade;
 
 
-
-
     /**
      * Get id
      *
@@ -102,6 +100,7 @@ class Exam
     {
         return $this->description;
     }
+
     /**
      * Constructor
      */
@@ -150,9 +149,4 @@ class Exam
     public function __toString(){
         return $this->name.' ';
     }
-
-   
-
-
-
 }

@@ -1,7 +1,6 @@
-<!doctype html>
-<html>
-<head></head>
-<body>
+{% extends '::base.html.twig' %}
+
+{% block content -%}
 <h1>Add an Exam</h1>
 
 {{ form_start(form) }}
@@ -9,5 +8,5 @@
 
 <input type="submit" value="Save" />
 {{ form_end(form) }}
-</body>
-</html>
+
+{% endblock %}

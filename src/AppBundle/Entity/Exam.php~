@@ -42,13 +42,6 @@ class Exam
      */
     private $grade;
 
-    /**
-     * @var Student
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Student", mappedBy="exam" , cascade={"persist"})
-     */
-    private $students;
-
 
     /**
      * Get id
@@ -107,6 +100,7 @@ class Exam
     {
         return $this->description;
     }
+
     /**
      * Constructor
      */
@@ -155,6 +149,4 @@ class Exam
     public function __toString(){
         return $this->name.' ';
     }
-
-   
 }

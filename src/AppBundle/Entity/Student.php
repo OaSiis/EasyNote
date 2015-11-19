@@ -50,37 +50,6 @@ class Student
     private $grade;
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->grade = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    /**
-     * Add grade
-     *
-     * @param \AppBundle\Entity\Grade $grade
-     *
-     * @return Student
-     */
-    public function addGrade(\AppBundle\Entity\Grade $grade)
-    {
-        $this->grade[] = $grade;
-        return $this;
-    }
-
-    /**
-     * Get grade
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getgrade()
-    {
-        return $this->grade;
-    }
-
-
-    /**
      * Get id
      *
      * @return integer
@@ -163,12 +132,24 @@ class Student
     }
 
     /**
-     * @return string
+     * Constructor
      */
-    public function __toString(){
-        return $this->firstName.' '.$this->lastName;
+    public function __construct()
+    {
+        $this->grade = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
+    /**
+     * Add grade
+     *
+     * @param \AppBundle\Entity\Grade $grade
+     *
+     * @return Student
+     */
+    public function addGrade(\AppBundle\Entity\Grade $grade)
+    {
+        $this->grade[] = $grade;
+        return $this;
+    }
 
     /**
      * Remove grade
@@ -178,5 +159,22 @@ class Student
     public function removeGrade(\AppBundle\Entity\Grade $grade)
     {
         $this->grade->removeElement($grade);
+    }
+
+    /**
+     * Get grade
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getgrade()
+    {
+        return $this->grade;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(){
+        return $this->firstName.' è°"" '.$this->lastName;
     }
 }
