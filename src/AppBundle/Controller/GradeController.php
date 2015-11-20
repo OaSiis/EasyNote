@@ -19,8 +19,9 @@ class GradeController extends Controller
     {
         $grades = $this->getDoctrine()->getManager()->getRepository('AppBundle:Grade')->findAll();
 
+
         return $this->render('AppBundle:Grade:index.html.twig', [
-            'grades' => $grades
+            'grades' => $grades,
         ]);
     }
 
@@ -37,13 +38,13 @@ class GradeController extends Controller
             $db = $this->getDoctrine()->getManager();
             $db->persist($grade);
             $db->flush();
-            return $this->redirectToRoute('admin_list');
+            return $this->redirectToRoute('grade_list');
         }
         return $this->render('AppBundle:Grade:add.html.twig', [
             'form' => $form->createView()
         ]);
     }
-    /**
+        /**
          * @Route("/grade/delete/{id}", name="grade_delete")
          */
         public function deleteAction($id)
@@ -54,6 +55,35 @@ class GradeController extends Controller
                 ->find($id);
             $db->remove($grade);
             $db->flush();
-            return $this->redirectToRoute('admin_list');
+            return $this->redirectToRoute('grade_list');
         }
+
+    /**
+     * @Route("/grade/update/{id}", name="grade_update")
+     */
+    public function updateAction($id)
+    {
+
+        $request = $this->get('request');
+
+        $db = $this->getDoctrine()->getEntityManager();
+        $grade = $db
+            ->getRepository('AppBundle:Grade')
+            ->find($id);
+        $form = $this->createForm(new GradeType(), $grade);
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $db->flush();
+
+                return $this->redirect($this->generateUrl('grade_list'));
+            }
+        }
+
+        return $this->render('AppBundle:Grade:update.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
 }

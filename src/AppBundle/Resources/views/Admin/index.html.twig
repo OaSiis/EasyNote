@@ -1,28 +1,82 @@
-{% extends '::base.html.twig' %}
+<!doctype HTML>
+<html>
+<head>
+    <title>- Admin Board -</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 
-{% block content -%}
-<h1>Students list</h1>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
 
-    <ul>
-        {% for student in students %}
-            <li>{{ student.firstName }} - {{ student.lastName }} <a href="{{ path('student_delete', {id: student.id }) }}">Delete Student</a></li>
-        {% endfor %}
-    </ul>
-<a href="{{ path('student_add') }}">Add Student</a>
-</br>
-<h1>Exam</h1>
-    <ul>
-        {% for exam in exams %}
-            <li>{{ exam.name }} - {{ exam.description }} <a href="{{ path('exam_delete', {id: exam.id }) }}">Delete Exam</a></li>
-        {% endfor %}
-    </ul>
-<a href="{{ path('exam_add') }}">Add Exam</a>
-<h1>Grade</h1>
-<ul>
-    {% for grade in grades %}
-        <li>{{ grade.gradeNumber }} {{ grade.student }} {{ grade.exam }} <a href="{{ path('grade_delete', {id: grade.id }) }}">Delete Grade</a></li>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+</head>
+<body style="text-align:center;">
+<div class="container">
+    <h1> - Admin Board - </h1>
+    <h2> "Welcome Master" </h2>
+    <p style="margin:30px;"><strong>- List -</strong></p>
+    <a href={{ path('student_list')}} ><button type="button" class="btn btn-primary">Students list</button></a>
+    <a href={{ path('exam_list')}} ><button type="button" class="btn btn-primary">Exams list</button></a>
+    <a href={{ path('grade_list')}} ><button type="button" class="btn btn-primary">Grades list</button></a>
+</div>
+<div class="container-fluid" style="background:black;color:white;margin-top:50px;">
+    <p  style="margin:30px;"><strong>- ADMINS -</strong></p>
+    <div class="container">
+        <div class="row" style="margin:5px;background:@;padding-top:5px;padding-bottom:5px;height:45px;">
+            <div class="col-xs-8" style="line-height:35px">
+                <div class="col-xs-3">
+                    <strong>Username</strong>
+                </div>
+                <div class="col-xs-4">
+                    <strong>Email</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% for admin in admins %}
+        <div class="container">
+            <div class="row" style="margin:5px;background: #323232;padding-top:5px;padding-bottom:5px;height:45px;border-radius:6px;">
+                <div class="col-xs-8" style="line-height:35px">
+                    <div class="col-xs-3">
+                        {{ admin.username }}
+                    </div>
+                    <div class="col-xs-4">
+                        {{ admin.email }}
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <a href={{ path('admin_delete', {id:admin.id}) }}><button type="button" class="btn btn-danger">Obliterate</button></a>
+                </div>
+            </div>
+        </div>
     {% endfor %}
-</ul>
-<a href="{{ path('grade_add') }}">Add Grade</a>
-
-{% endblock %}
+    <div style="margin:30px;">
+        <a href={{ path('admin_add')}}><button type="button" class="btn btn-success">Add an admin</button></a>
+    </div>
+</div>
+<div style="margin:30px;">
+    <a href='/logout'><button type="button" class="btn btn-danger">Logout</button></a>
+</div>
+<style>
+    .btn {
+        border: none;
+    }
+    .btn-success {
+        background: green;
+    }
+    .btn-danger{
+        background: #9C0900;
+    }
+    .btn-warning{
+        background: orange;
+    }
+    .btn-primary {
+        background: #1AA4FF;
+    }
+    .row{
+        border-radius:6px;
+    }
+</style>
+</body>
+</html>

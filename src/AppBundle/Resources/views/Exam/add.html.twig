@@ -1,12 +1,61 @@
-{% extends '::base.html.twig' %}
+<!doctype HTML>
+<html>
+<head>
+    <title>- Add Exam -</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+          integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+          crossorigin="anonymous">
 
-{% block content -%}
-<h1>Add an Exam</h1>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"
+          integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
 
-{{ form_start(form) }}
-{{ form_rest(form) }}
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+            integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+            crossorigin="anonymous"></script>
+</head>
+<body style="text-align:center;color:white;background-color: #1F0F0F;">
+<div class="container">
+    <h1 style="padding-bottom:30px">- Add an exam -</h1>
 
-<input type="submit" value="Save" />
-{{ form_end(form) }}
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
 
-{% endblock %}
+    <button type="submit" class="btn btn-success">Add exam to database</button>
+    {{ form_end(form) }}
+
+    <div style="margin-top:30px">
+        <a href={{ path('exam_list') }}>
+            <button type="button" class="btn btn-primary">Back to Exams list</button>
+        </a>
+    </div>
+</div>
+<style>
+    .btn {
+        border: none;
+    }
+
+    .btn-success {
+        background: green;
+    }
+
+    .btn-danger {
+        background: #9C0900;
+    }
+
+    .btn-warning {
+        background: orange;
+    }
+
+    .btn-primary {
+        background: #1AA4FF;
+    }
+
+    .row {
+        border-radius: 6px;
+    }
+</style>
+</body>
+</html>

@@ -175,6 +175,6 @@ class Student
      * @return string
      */
     public function __toString(){
-        return $this->firstName.' è°"" '.$this->lastName;
+        return $this->firstName.' ';
     }
 }

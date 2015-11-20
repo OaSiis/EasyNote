@@ -14,25 +14,21 @@ use FOS\UserBundle\Controller\RegistrationController as BaseController;
 class AdminController extends BaseController
 {
     /**
-     * @Route("/admin", name="admin_list")
+     * @Route("/", name="admin_list")
      */
     public function indexAction()
     {
-        $students = $this->getDoctrine()->getManager()->getRepository('AppBundle:Student')->findAll();
-        $exams = $this->getDoctrine()->getManager()->getRepository('AppBundle:Exam')->findAll();
-        $grades = $this->getDoctrine()->getManager()->getRepository('AppBundle:Grade')->findAll();
+        $admins = $this->getDoctrine()->getManager()->getRepository('AppBundle:Admin')->findAll();
 
         return $this->render('AppBundle:Admin:index.html.twig', [
-            'students' => $students,
-            'exams' => $exams,
-            'grades' => $grades
+            'admins' => $admins
         ]);
     }
 
     /**
      * @return mixed
      *
-     * @Route("/admin/add" , name="admin_add")
+     * @Route("/add" , name="admin_add")
      */
     public function addAction(Request $request)
     {
@@ -53,5 +49,20 @@ class AdminController extends BaseController
         return $this->render('AppBundle:Admin:add.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/admin/delete/{id}", name="admin_delete")
+     */
+    public function deleteAction($id)
+    {
+        $db = $this->getDoctrine()->getManager();
+
+        $admin = $db->getRepository('AppBundle:Admin')->find($id);
+
+        $db->remove($admin);
+        $db->flush();
+
+        return $this->redirectToRoute('admin_list');
     }
 }

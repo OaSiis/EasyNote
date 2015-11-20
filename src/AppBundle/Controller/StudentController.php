@@ -23,6 +23,7 @@ class StudentController extends Controller
             'students' => $students
         ]);
     }
+
     /**
      * @Route("/student/add", name="student_add")
      */
@@ -36,7 +37,7 @@ class StudentController extends Controller
             $db = $this->getDoctrine()->getManager();
             $db->persist($student);
             $db->flush();
-            return $this->redirectToRoute('admin_list');
+            return $this->redirectToRoute('student_list');
         }
         return $this->render('AppBundle:Student:add.html.twig', [
             'form' => $form->createView()
@@ -54,6 +55,35 @@ class StudentController extends Controller
             ->find($id);
         $db->remove($student);
         $db->flush();
-        return $this->redirectToRoute('admin_list');
+        return $this->redirectToRoute('student_list');
+    }
+
+    /**
+     * @Route("/student/update/{id}", name="student_update")
+     */
+    public function updateAction($id)
+    {
+
+        $request = $this->get('request');
+
+        $db = $this->getDoctrine()->getEntityManager();
+        $student = $db
+            ->getRepository('AppBundle:Student')
+            ->find($id);
+        $form = $this->createForm(new StudentType(), $student);
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $db->flush();
+
+                return $this->redirect($this->generateUrl('student_list'));
+            }
+        }
+
+        return $this->render('AppBundle:Student:update.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 }

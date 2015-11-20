@@ -19,10 +19,10 @@ class ExamController extends Controller
      */
     public function indexAction()
     {
-        $students = $this->getDoctrine()->getManager()->getRepository('AppBundle:Exam')->findAll();
+        $exams = $this->getDoctrine()->getManager()->getRepository('AppBundle:Exam')->findAll();
 
         return $this->render('AppBundle:Exam:index.html.twig', [
-            'exam' => $students
+            'exams' => $exams
         ]);
     }
 
@@ -39,7 +39,7 @@ class ExamController extends Controller
             $db = $this->getDoctrine()->getManager();
             $db->persist($exam);
             $db->flush();
-            return $this->redirectToRoute('admin_list');
+            return $this->redirectToRoute('exam_list');
         }
         return $this->render('AppBundle:Exam:add.html.twig', [
             'form' => $form->createView()
@@ -57,6 +57,35 @@ class ExamController extends Controller
             ->find($id);
         $db->remove($exam);
         $db->flush();
-        return $this->redirectToRoute('admin_list');
+        return $this->redirectToRoute('exam_list');
+    }
+
+    /**
+     * @Route("/exam/update/{id}", name="exam_update")
+     */
+    public function updateAction($id)
+    {
+
+        $request = $this->get('request');
+
+        $db = $this->getDoctrine()->getEntityManager();
+        $exam = $db
+            ->getRepository('AppBundle:Exam')
+            ->find($id);
+        $form = $this->createForm(new ExamType(), $exam);
+
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $db->flush();
+
+                return $this->redirect($this->generateUrl('exam_list'));
+            }
+        }
+
+        return $this->render('AppBundle:Exam:update.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 }

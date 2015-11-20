@@ -31,14 +31,14 @@ class Grade
     /**
      * @var Student
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Student", inversedBy="grade")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Student", inversedBy="grade", cascade={"persist"})
      */
     private $student;
 
     /**
      * @var Exam
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Exam", inversedBy="grade")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Exam", inversedBy="grade", cascade={"persist"})
      */
     private $exam;
 
