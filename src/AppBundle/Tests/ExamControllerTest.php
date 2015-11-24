@@ -4,9 +4,9 @@ namespace AppBundle\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class StudentControllerTest extends WebTestCase
+class ExamControllerTest extends WebTestCase
 {
-    public function test_it_lists_students()
+    public function test_it_lists_exams()
     {
         $client = static::createClient();
 
@@ -21,13 +21,13 @@ class StudentControllerTest extends WebTestCase
         // submit the form
         $client->submit($form);
 
-        $crawler = $client->request('GET', '/admin/student');
+        $crawler = $client->request('GET', '/admin/exam');
 
         // Ce test est idiot. Améliorez-le !
-        $this->assertContains('Students list', $client->getResponse()->getContent());
+        $this->assertContains('Exams list', $client->getResponse()->getContent());
     }
 
-    public function test_it_add_students()
+    public function test_it_add_exams()
     {
         $client = static::createClient();
 
@@ -42,21 +42,21 @@ class StudentControllerTest extends WebTestCase
         // submit the form
         $client->submit($form);
 
-        $crawler = $client->request('GET', '/admin/student/add');
 
-        $form = $crawler->selectButton('save')->form(array_merge(array(
-            'appbundle_student[email]' => 'test@test',
-            'appbundle_student[firstName]' => 'test',
-            'appbundle_student[lastName]' => 'test',
-        )));
+        $crawler = $client->request('GET', '/admin/exam/add');
+
+        $form = $crawler->selectButton('save')->form();
+        // set some values
+        $form['appbundle_exam[name]'] = 'Symfony 2';
+        $form['appbundle_exam[description]'] = 'exam controller test';
 
         // submit the form
         $client->submit($form);
 
-        $crawler = $client->request('GET', '/admin/student');
+        $crawler = $client->request('GET', '/admin/exam');
 
         // Ce test est idiot. Améliorez-le !
-        $this->assertContains('test - test', $client->getResponse()->getContent());
+        $this->assertContains('Symfony 2', $client->getResponse()->getContent());
     }
 
     public function test_it_delete_students()
@@ -72,18 +72,17 @@ class StudentControllerTest extends WebTestCase
         // submit the form
         $client->submit($form);
 
-        $crawler = $client->request('GET', '/admin/student/add');
+        $crawler = $client->request('GET', '/admin/exam/add');
 
-        $form = $crawler->selectButton('save')->form(array_merge(array(
-            'appbundle_student[email]' => 'test@test',
-            'appbundle_student[firstName]' => 'test',
-            'appbundle_student[lastName]' => 'test',
-        )));
+        $form = $crawler->selectButton('save')->form();
+        // set some values
+        $form['appbundle_exam[name]'] = 'Symfony 2';
+        $form['appbundle_exam[description]'] = 'exam controller test';
 
         // submit the form
         $client->submit($form);
 
-        $crawler = $client->request('GET', '/admin/student');
+        $crawler = $client->request('GET', '/admin/exam');
 
         $link = $crawler->selectLink('Obliterate')->link();
         $client->click($link);

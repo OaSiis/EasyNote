@@ -36,10 +36,13 @@
                     {{student.email}}
                 </div>
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-1">
+                <a href={{ path('student_show', {id:student.id}) }}><button type="button" class="btn btn-default">Show</button></a>
+            </div>
+            <div class="col-xs-1">
                 <a href={{ path('student_update', {id:student.id}) }}><button type="button" class="btn btn-warning">Update</button></a>
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-1">
                 <a href={{ path('student_delete', {id:student.id}) }}><button type="button" class="btn btn-danger" value="delete">Obliterate</button></a>
             </div>
         </div>

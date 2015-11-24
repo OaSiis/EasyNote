@@ -1,4 +1,10 @@
-my_project
+EasyNote
 ==========
 
-A Symfony project created on November 16, 2015, 1:56 pm.
+Collaborator:
+
+Adrien Bonnet
+Guillaume Beuzelin
+Alain Beteille
+Paul Tavelet
+Maximilien Charbonnelle

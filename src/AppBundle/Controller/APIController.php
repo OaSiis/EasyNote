@@ -41,13 +41,26 @@ class APIController extends FOSRestController
     }
 
     /**
-     * @Route("/grades", name="api_grades")
-     */
+ * @Route("/grades", name="api_grades")
+ */
     public function getGradesAction()
     {
         $data = $this->getDoctrine()->getManager()
             ->getRepository('AppBundle:Grade')
             ->findAll();
+        $view = $this->view($data, 200)
+        ;
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Route("/students/{id}", name="api_students_id", defaults={"id"=null}, requirements={"id"="\d+"})
+     */
+    public function getStudentAction($id)
+    {
+        $student = $this->getDoctrine()->getManager()->getRepository('AppBundle:Student')->find($id);
+        $data = $student->getGrade();
         $view = $this->view($data, 200)
         ;
 

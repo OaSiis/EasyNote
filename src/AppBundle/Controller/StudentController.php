@@ -25,6 +25,20 @@ class StudentController extends Controller
     }
 
     /**
+     * @Route("/student/{id}", name="student_show", defaults={"id"=null}, requirements={"id"="\d+"})
+     */
+    public function showAction($id)
+    {
+        $student = $this->getDoctrine()->getManager()->getRepository('AppBundle:Student')->find($id);
+        $grades = $student->getGrade();
+
+        return $this->render('AppBundle:Student:show.html.twig', [
+            'grades'      => $grades,
+            'student'     => $student,
+        ]);
+    }
+
+    /**
      * @Route("/student/add", name="student_add")
      */
     public function addAction(Request $request)
