@@ -21,7 +21,7 @@ class ExamControllerTest extends WebTestCase
         // submit the form
         $client->submit($form);
 
-        $crawler = $client->request('GET', '/admin/exam');
+        $client->request('GET', '/admin/exam');
 
         // Ce test est idiot. Améliorez-le !
         $this->assertContains('Exams list', $client->getResponse()->getContent());
@@ -42,18 +42,16 @@ class ExamControllerTest extends WebTestCase
         // submit the form
         $client->submit($form);
 
-
         $crawler = $client->request('GET', '/admin/exam/add');
 
         $form = $crawler->selectButton('save')->form();
         // set some values
         $form['appbundle_exam[name]'] = 'Symfony 2';
-        $form['appbundle_exam[description]'] = 'exam controller test';
+        $form['appbundle_exam[description]'] = 'Best framework';
 
         // submit the form
         $client->submit($form);
-
-        $crawler = $client->request('GET', '/admin/exam');
+        $client->followRedirect();
 
         // Ce test est idiot. Améliorez-le !
         $this->assertContains('Symfony 2', $client->getResponse()->getContent());
@@ -72,21 +70,13 @@ class ExamControllerTest extends WebTestCase
         // submit the form
         $client->submit($form);
 
-        $crawler = $client->request('GET', '/admin/exam/add');
-
-        $form = $crawler->selectButton('save')->form();
-        // set some values
-        $form['appbundle_exam[name]'] = 'Symfony 2';
-        $form['appbundle_exam[description]'] = 'exam controller test';
-
-        // submit the form
-        $client->submit($form);
-
         $crawler = $client->request('GET', '/admin/exam');
 
         $link = $crawler->selectLink('Obliterate')->link();
         $client->click($link);
 
-        $crawler = $client->request('GET', '/admin/student');
+        $client->followRedirect();
+
+        $this->assertTrue($client->getResponse()->isSuccessful());
     }
 }

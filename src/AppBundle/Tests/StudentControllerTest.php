@@ -23,7 +23,6 @@ class StudentControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/admin/student');
 
-        // Ce test est idiot. Améliorez-le !
         $this->assertContains('Students list', $client->getResponse()->getContent());
     }
 
@@ -45,18 +44,16 @@ class StudentControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/admin/student/add');
 
         $form = $crawler->selectButton('save')->form(array_merge(array(
-            'appbundle_student[email]' => 'test@test',
-            'appbundle_student[firstName]' => 'test',
-            'appbundle_student[lastName]' => 'test',
+            'appbundle_student[email]' => 'John@Doe.fr',
+            'appbundle_student[firstName]' => 'John',
+            'appbundle_student[lastName]' => 'Doe',
         )));
 
         // submit the form
         $client->submit($form);
+        $client->followRedirect();
 
-        $crawler = $client->request('GET', '/admin/student');
-
-        // Ce test est idiot. Améliorez-le !
-        $this->assertContains('test - test', $client->getResponse()->getContent());
+        $this->assertContains('John - Doe', $client->getResponse()->getContent());
     }
 
     public function test_it_delete_students()
@@ -72,22 +69,13 @@ class StudentControllerTest extends WebTestCase
         // submit the form
         $client->submit($form);
 
-        $crawler = $client->request('GET', '/admin/student/add');
-
-        $form = $crawler->selectButton('save')->form(array_merge(array(
-            'appbundle_student[email]' => 'test@test',
-            'appbundle_student[firstName]' => 'test',
-            'appbundle_student[lastName]' => 'test',
-        )));
-
-        // submit the form
-        $client->submit($form);
-
         $crawler = $client->request('GET', '/admin/student');
 
         $link = $crawler->selectLink('Obliterate')->link();
         $client->click($link);
 
-        $crawler = $client->request('GET', '/admin/student');
+        $client->followRedirect();
+
+        $this->assertTrue($client->getResponse()->isSuccessful());
     }
 }
